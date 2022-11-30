@@ -9,7 +9,7 @@ public final class Entreprise {
 
     private static final Map<Integer, LocalDate> datePaque = new HashMap<>();
 
-    private Entreprise() {
+    public Entreprise() {
 
     }
 
@@ -72,7 +72,7 @@ public final class Entreprise {
 
     public static boolean bissextile(int y) {
         String tmp = String.valueOf(y);
-        if (tmp.charAt(2) == '1' || tmp.charAt(2) == '3' || tmp.charAt(2) == 5 || tmp.charAt(2) == '7' || tmp.charAt(2) == '9') {
+        if (tmp.charAt(2) == '1' || tmp.charAt(2) == '3' || tmp.charAt(2) == '5' || tmp.charAt(2) == '7' || tmp.charAt(2) == '9') {
             if (tmp.charAt(3)=='2'||tmp.charAt(3)=='6') return true;
             else
                 return false;
@@ -88,37 +88,10 @@ public final class Entreprise {
     public static double proportionPondereeDuMois(LocalDate moisDuConge) {
         int proportionPonderee = 8;
         int mois = 1 + (moisDuConge.getMonthValue() + 6) % 12;
-        if (mois >= 2) {
+        if (mois >= 2 || mois <= 3) {
             proportionPonderee += 20;
         }
-        if (mois >= 3) {
-            proportionPonderee += 20;
-        }
-        if (mois >= 4) {
-            proportionPonderee += 8;
-        }
-        if (mois >= 5) {
-            proportionPonderee += 8;
-        }
-        if (mois >= 6) {
-            proportionPonderee += 8;
-        }
-        if (mois >= 7) {
-            proportionPonderee += 8;
-        }
-        if (mois >= 8) {
-            proportionPonderee += 8;
-        }
-        if (mois >= 9) {
-            proportionPonderee += 8;
-        }
-        if (mois >= 10) {
-            proportionPonderee += 8;
-        }
-        if (mois >= 11) {
-            proportionPonderee += 8;
-        }
-        if (mois >= 12) {
+        if (mois >= 4 || mois <= 12) {
             proportionPonderee += 8;
         }
         return proportionPonderee / 12d / 10d;
@@ -127,7 +100,7 @@ public final class Entreprise {
 
     public static LocalDate getPremierJourAnneeDeConges(LocalDate d) {
         return d == null ? null
-                : d.getMonthValue() > 5 ? LocalDate.of(d.getMonthValue(), 6, 1)
+                : d.getMonthValue() > 5 ? LocalDate.of(d.getYear(), 6, 1)
                 : LocalDate.of(d.getYear() - 1, 6, 1);
     }
 
@@ -143,7 +116,8 @@ public final class Entreprise {
 
     public static boolean estDansPlage(LocalDate d, LocalDate debut, LocalDate fin) {
         // à implémenter en TDD !
-        throw new NotImplementedException();
+    	if(d == null) { return false; }
+    	return !(d.isBefore(debut) || d.isAfter(fin));
     }
 
 }

@@ -65,8 +65,8 @@ public class SalarieAideADomicileService {
         double limiteConges = proportionPondereeDuConge * congesPayesAcquisAnneeNMoins1;
 
         // moyenne annuelle des congés pris :
-        Double partCongesPrisTotauxAnneeNMoins1 = salarieAideADomicileRepository.partCongesPrisTotauxAnneeNMoins1();
-
+        Double partCongesPrisTotauxAnneeNMoins1 = congesPayesAcquisAnneeNMoins1;
+        
         // si la moyenne actuelle des congés pris diffère de 20% de la la proportion selon l'avancement dans l'année
         // pondérée avec poids plus gros sur juillet et août (20 vs 8),
         // bonus ou malus de 20% de la différence pour aider à équilibrer la moyenne actuelle des congés pris :
